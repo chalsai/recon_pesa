@@ -1,0 +1,28 @@
+stages:
+  - setup
+  - deploy
+
+variables:
+  POSTGRES_HOST: your-postgresql-host
+  POSTGRES_PORT: your-postgresql-port
+  POSTGRES_DB: your-database-name
+  POSTGRES_USER: your-username
+  POSTGRES_PASSWORD: your-password
+
+setup:
+  stage: setup
+  image: python:3.9
+  script:
+    - pip install psycopg2
+    - python create_database.py
+    - python generate_vxml_request.py
+  tags:
+    - your-gitlab-runner-tag
+
+deploy:
+  stage: deploy
+  image: your-deployment-image
+  script:
+    - # Add your deployment commands here
+  tags:
+    - your-gitlab-runner-tag
